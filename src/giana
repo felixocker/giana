@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# analyze your coding habits - based on git commits 
+# Usage: bash giana dir_path
+
+dir_path="$1"
+cwd=$(pwd)
+
+# ensure that dir_path is not empty
+if [ -z "$dir_path" ]; then
+  echo "giana: missing dir_path"
+  exit 1
+fi
+
+cd $dir_path
+abs_path=$(pwd)
+git log | grep "Date" | sed 's/^.\{,8\}//' > $cwd/giana.log
+cd $cwd
+python ./giana.py $abs_path
+rm giana.log
+

@@ -1,0 +1,10 @@
+# folders
+.venv
+
+# by filetype
+*.log
+*.png
+
+# individual files
+!docs/*.png
+
