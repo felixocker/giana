@@ -43,13 +43,17 @@ class Giana():
         labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         width = 0.35
         fig, ax = plt.subplots()
-        ax.bar(labels, self.day_night_dist[1], width, label='night', color='dimgrey')
-        ax.bar(labels, self.day_night_dist[0], width, bottom=self.day_night_dist[1], label='day', color='lightgrey')
+        ax.bar(labels, self.day_night_dist[1], width, label=self.label_barchart('night', self.night, self.day), color='midnightblue')
+        ax.bar(labels, self.day_night_dist[0], width, bottom=self.day_night_dist[1], label=self.label_barchart('day', self.day, self.night), color='lightsteelblue')
         ax.set_ylabel('Commits')
         ax.set_title(f'Commits by day and time for { self.repo }')
         ax.legend()
         self.barchart = ax.get_figure()
         plt.show()
+
+    @staticmethod
+    def label_barchart(text, start, end):
+        return text+' ('+str(start)+' - '+str(end)+')'
 
     def analyze_by_hour(self):
         """count number of commits by day and hour"""
